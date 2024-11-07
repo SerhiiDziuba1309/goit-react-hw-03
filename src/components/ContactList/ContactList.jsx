@@ -1,14 +1,17 @@
 import React from 'react';
+import Contact from './Contact';
+import s from './ContactList.module.css';
 
-const Options = ({ onLeaveFeedback, onReset, totalFeedback }) => {
+function ContactList({ contacts, deleteContact }) {
   return (
-    <div>
-      <button onClick={() => onLeaveFeedback('good')}>Good</button>
-      <button onClick={() => onLeaveFeedback('neutral')}>Neutral</button>
-      <button onClick={() => onLeaveFeedback('bad')}>Bad</button>
-      {totalFeedback > 0 && <button onClick={onReset}>Reset</button>}
-    </div>
+    <ul className={s.list}>
+      {contacts.map(contact => (
+        <li className={s.item} key={contact.id} className={s.item}>
+          <Contact {...contact} deleteContact={deleteContact} />
+        </li>
+      ))}
+    </ul>
   );
-};
+}
 
-export default Options;
+export default ContactList;
